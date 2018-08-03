@@ -3,6 +3,9 @@ import unittest
 
 from text_recognizer.character_predictor import CharacterPredictor
 
+"""
+Quick to run tests as sanity checks on sample test imgs (in support)
+"""
 
 SUPPORT_DIRNAME = pathlib.Path(__file__).parents[0].resolve() / 'support' / 'emnist'
 

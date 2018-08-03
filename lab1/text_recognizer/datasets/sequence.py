@@ -1,11 +1,16 @@
+
 import numpy as np
 from tensorflow.keras.utils import Sequence
 
+"""
+Outputs batches of data
+"""
 
 class DatasetSequence(Sequence):
     """
     Minimal implementation of https://keras.io/utils/#sequence.
     Allows easy use of fit_generator in training.
+    Can be instantiated with augmentation and formatting functions
     """
     def __init__(self, x, y, batch_size=32, augment_fn=None, format_fn=None):
         self.x = x

@@ -11,6 +11,7 @@ from training.gpu_util_sampler import GPUUtilizationSampler
 
 
 EARLY_STOPPING = True
+# custom written for this lab: checks gpu utilization after each batch training
 GPU_UTIL_SAMPLER = True
 
 

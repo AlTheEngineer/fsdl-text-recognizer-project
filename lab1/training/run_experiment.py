@@ -7,6 +7,9 @@ import os
 
 from training.util import train_model
 
+"""
+Processes config/json files to load the correct objects
+"""
 
 DEFAULT_TRAIN_ARGS = {
     'batch_size': 64,

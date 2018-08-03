@@ -1,5 +1,6 @@
 """
-EMNIST dataset. Downloads from NIST website and saves as .npz file if not already present.
+Dataset class that takes in raw data and outputs processed data
+EMNIST dataset. Downloads from NIST website and saves as .npz file if not already present. 
 """
 import json
 import os
@@ -26,7 +27,7 @@ PROCESSED_DATA_DIRNAME = Dataset.data_dirname() / 'processed' / 'emnist'
 PROCESSED_DATA_FILENAME = PROCESSED_DATA_DIRNAME / 'byclass.h5'
 ESSENTIALS_FILENAME = pathlib.Path(__file__).parents[0].resolve() / 'emnist_essentials.json'
 
-
+# This class downloads and processes the EMNIST raw data. In the lab we download the processed data directly.
 class EmnistDataset(Dataset):
     """
     "The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19
