@@ -85,7 +85,7 @@ class LineModelCtc(Model):
 
         return pred, conf
 
-
+# CTC needs extra input formatting, done by the following function
 def format_batch_ctc(batch_x, batch_y):
     """
     Because CTC loss needs to be computed inside of the network, we include information about outputs in the inputs.

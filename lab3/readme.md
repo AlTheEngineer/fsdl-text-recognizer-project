@@ -1,3 +1,34 @@
+# Notes
+We solve lab2s problem using LSTM with CTC loss (see distill post for details). Uses dynamic programming to find the best alignments through marginalization. Inference done through beam search. Model assumes conditional dependence.
+
+ZFNet was the next improvement over AlexNet. Involved just hyperparameter tuning. The paper more popular for deconvolution visualizations.
+
+Next came VGG16 that adopted a uniform architecture applied repeatedly. Conv layers are memory intensive despite fewer params. FC layers require more compute.
+GoogLeNet are just as deep as VGG but fewer parameters by removing FC layers. Implements the inception module. Adopts arch that avoids arch search but results in huge depth dimensions. Issue solved by using 1x1 conv layers. 1x1 convs can be used for cross-channel correlations. Inkected classifier loss at earlier layers, which incentivises learning in the earlier layers.
+
+Human performance on ImageNet measured by Andrej Karpathy. 
+
+ResNets used skip connections to avoid depth-related problems with CNN training.DenseNets add more skip connections. ResNext introduces cardinality of a module. 
+
+SENet (2017 SoA) adds a module of pooling+FC to adaptively reweight feature output maps. Similar to the concept of attention. 
+
+SqueezeNet that achieved AlexNet accuracy with 50x fewer params. Uses 1x1 conv layers as the main trick. Interesting for mobile deployments. 
+
+ResNets and Inceptionv4 are probably a nice sweet spot between accuracy/compute cost. 
+
+Overfeat is first network that attempted detection by showing fc-conv equivalency allowing sliding. YOLO and SSD then scaled up the idea by using grid cells. The alternative is region proposal methods (R-CNNs). 
+
+Qs: Has anyone tried pixel-to-pixel heat map generation for detection? Fully Convolutional Networks paper (But how do you upsample? read transpose convolutions)
+    Why does YOLO still need non-max suppression? 
+    What about the use of other output classifiers than softmax? 
+    
+Homework:
+    Use data augmentation on labs
+    Implement Inception v4 and ResNet50 for lab1 and lab3 
+    Implement bidirectional LSTMs for lab3
+    Read about region proposal, RCNN, Faster RCNN, and Mask RCNN
+    Maybe try transfer learning
+
 # Lab 3
 
 In this lab we'll keep working with the EmnistLines dataset.

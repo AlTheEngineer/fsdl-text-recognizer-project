@@ -35,14 +35,33 @@ def line_lstm_ctc(input_shape, output_shape, window_width=28, window_stride=14):
     # Note that lstms expect a input of shape (num_batch_size, num_timesteps, feature_length).
 
     ##### Your code below (Lab 3)
+    image_reshaped = Reshape((image_height, image_width, 1))(image_input)
+    # (image_height, image_width, 1)
 
+    image_patches = Lambda(
+        slide_window,
+        arguments={'window_width': window_width, 'window_stride': window_stride}
+    )(image_reshaped)
+    # (num_windows, image_height, window_width, 1)
+
+    # Make a LeNet and get rid of the last two layers (softmax and dropout)
+    convnet = lenet((image_height, window_width, 1), (num_classes,))
+    convnet = KerasModel(inputs=convnet.inputs, outputs=convnet.layers[-2].output)
+    convnet_outputs = TimeDistributed(convnet)(image_patches)
+    # (num_windows, 128)
+    # feed lenet outputs to a LSTM (instead of sliding windows). Try bidirectional and wider layers
+    lstm_output = lstm_fn(128, return_sequences=True)(convnet_outputs)
+    # (num_windows, 128)
+
+    softmax_output = Dense(num_classes, activation='softmax', name='softmax_output')(lstm_output)
+    # (num_windows, num_classes)
     ##### Your code above (Lab 3)
 
     input_length_processed = Lambda(
         lambda x, num_windows=None: x * num_windows,
         arguments={'num_windows': num_windows}
     )(input_length)
-
+    #use google implementation of CTC
     ctc_loss_output = Lambda(
         lambda x: K.ctc_batch_cost(x[0], x[1], x[2], x[3]),
         name='ctc_loss'
