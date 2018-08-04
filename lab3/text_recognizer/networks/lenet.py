@@ -1,13 +1,13 @@
 from typing import Optional, Tuple
 
 import tensorflow as tf
-from tensorflow.keras.layers import Conv2D, Dense, Dropout, Flatten, Input, Lambda, MaxPooling2D
+from tensorflow.keras.layers import Input, Add, Activation, ZeroPadding2D, BatchNormalization, Conv2D, AveragePooling2D, MaxPooling2D, GlobalMaxPooling2D, Reshape, Flatten, Dropout, Dense
 from tensorflow.keras.models import Sequential, Model
 
 
 def lenet(input_shape: Tuple[int, ...], output_shape: Tuple[int, ...]) -> Model:
     
-    image_height, image_width = input_shape
+    image_height, image_width, nc = input_shape
     
     num_classes = output_shape[0]
     
