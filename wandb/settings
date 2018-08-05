@@ -1,0 +1,4 @@
+[default]
+entity: altheengineer
+project: test1
+base_url: https://api.wandb.ai

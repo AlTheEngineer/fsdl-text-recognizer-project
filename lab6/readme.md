@@ -1,3 +1,9 @@
+# Notes
+We looked at Continuous Integration using CircleCI by running functionality and evaluation tests. 
+CircleCI automatically syncs to your github repo to indicate any test failures. 
+Then use git revert if failures occur to revert to your original version. No Training System Tests were implemented due to computational cost. YOU should be doing that and perhaps run on gpu-enable CI environment like BuildKite
+
+
 # Lab 6/7: Testing and Deployment
 
 As always, the first thing to do is `git pull` :)

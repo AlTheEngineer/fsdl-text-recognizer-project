@@ -16,25 +16,29 @@ from tensorflow.keras import backend
 from text_recognizer.line_predictor import LinePredictor
 from text_recognizer.datasets import IamLinesDataset
 import text_recognizer.util as util
-
+# instantiate flask web server
 app = Flask(__name__)
 
 # Tensorflow bug: https://github.com/keras-team/keras/issues/2397
+# Just to make sure we get the right TF session
 with backend.get_session().graph.as_default() as g:
     predictor = LinePredictor()
     # predictor = LinePredictor(dataset_cls=IamLinesDataset)
 
-
+# Essentially corresspond to functions
+# Test route
 @app.route('/')
 def index():
     return 'Hello, world!'
 
-
+# Main route (standard practice to version APIs e.g. v1)
 @app.route('/v1/predict', methods=['GET', 'POST'])
 def predict():
     image = _load_image()
     with backend.get_session().graph.as_default() as g:
+        #load images
         pred, conf = predictor.predict(image)
+        # log confidence, mean intensity of pixels, and model prediction that is returned to user
         print("METRIC confidence {}".format(conf))
         print("METRIC mean_intensity {}".format(image.mean()))
         print("INFO pred {}".format(pred))
