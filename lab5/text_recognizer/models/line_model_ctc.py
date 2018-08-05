@@ -26,7 +26,7 @@ class LineModelCtc(Model):
             dataset_args = {}
         dataset_args = {**default_dataset_args, **dataset_args}
 
-        default_network_args = {'window_width': 14, 'window_stride': 7}
+        default_network_args = {'window_width': 14, 'window_stride': 2}
         if network_args is None:
             network_args = {}
         network_args = {**default_network_args, **network_args}
