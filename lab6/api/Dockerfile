@@ -18,6 +18,9 @@ ENV LANG C.UTF-8
 RUN set -ex && pip3 install -r api/requirements.txt
 
 # Run the web server
+# url 
 EXPOSE 8000
+#path to code
 ENV PYTHONPATH /repo
+#
 CMD python3 /repo/api/app.py

@@ -3,7 +3,9 @@ We looked at Continuous Integration using CircleCI by running functionality and 
 CircleCI automatically syncs to your github repo to indicate any test failures. 
 Then use git revert if failures occur to revert to your original version. No Training System Tests were implemented due to computational cost. YOU should be doing that and perhaps run on gpu-enable CI environment like BuildKite
 
+We looked at app.py to launch a web server using Flask. We tested on the hello world example. We can query it with a data example using a path to the file or url. 
 
+We then build a docker image. Good practice to have a docker ignore file. Installs base image (OS), then pip and pipenv. Make a working directory on the docker container that has all the working code. copy the relevant directories to the docker image (prediction and serving systems). Now the docker image is built. We run the container. The logged metrics are examples of how you would monitor distribution skewness and general model performance. 
 # Lab 6/7: Testing and Deployment
 
 As always, the first thing to do is `git pull` :)
