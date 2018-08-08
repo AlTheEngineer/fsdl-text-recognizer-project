@@ -61,7 +61,7 @@ def run_experiment(experiment_config: Dict, save_weights: bool, gpu_ind: int, us
     experiment_config['experiment_group'] = experiment_config.get('experiment_group', None)
     experiment_config['gpu_ind'] = gpu_ind
 
-    # Run training script using loaded objects
+
     train_model(
         model,
         dataset,
@@ -70,12 +70,10 @@ def run_experiment(experiment_config: Dict, save_weights: bool, gpu_ind: int, us
         gpu_ind=gpu_ind,
         use_wandb=use_wandb
     )
-    # Compute performance using evaluation metric on the test set
     score = model.evaluate(dataset.x_test, dataset.y_test)
-    # Print performance score
     print(f'Test evaluation: {score}')
 
-    # Save model weights
+
     if save_weights:
         model.save_weights()
 

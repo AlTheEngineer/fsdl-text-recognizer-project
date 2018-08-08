@@ -1,18 +1,3 @@
-#Notes
-The following set of notes aim to describe the details behind the codebase of the fsdl text recognizer projects. It will go through each folder and give high-level descriptions of each file. 
-## Tasks
-The tasks folder contains bash scripts for running Python commands for model training and prediction
-
-## Training
-Contains the run_experiment.py script which processes config/json files to load the correct objects from the relevant classes (e.g. Datasets, Models, Networks) and then uses them to run the training script, then compute and print performance scores. 
-
-Contains the utils.py which has the train_model() script for model training. It applies early stopping, GPU utilization logging, prints model summary, training on data, prints training time and returns the trained model. 
-
-## Text Recognizer
-
-### datasets
-
-
 # Lab 1: Plumbing
 
 To start with lab1, `cd lab1`.
