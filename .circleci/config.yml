@@ -21,7 +21,7 @@ jobs:
             sudo pip install --upgrade pip
             sudo pip install pipenv
             sed -i 's/tensorflow-gpu/tensorflow/' Pipfile
-            pipenv install --dev
+            pipenv install --dev -e
 
       - save_cache:
           key: cache-{{ checksum "Pipfile.lock" }}
