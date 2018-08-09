@@ -16,8 +16,12 @@ GPU_UTIL_SAMPLER = True
 
 
 def train_model(model: Model, dataset: Dataset, epochs: int, batch_size: int, gpu_ind: Optional[int]=None, use_wandb=False) -> Model:
+    # A callback is a set of functions to be applied at given stages of the training procedure. 
+    # You can use callbacks to get a view on internal states and statistics of the model during training.
+    # You can pass a list of callbacks (as the keyword argument callbacks) to the .fit() method of the Sequential or Model classes. 
+    # The relevant methods of the callbacks will then be called at each stage of the training.
     callbacks = []
-
+    # Pass early stopping to callback
     if EARLY_STOPPING:
         early_stopping = EarlyStopping(monitor='val_loss', min_delta=0.01, patience=3, verbose=1, mode='auto')
         callbacks.append(early_stopping)
