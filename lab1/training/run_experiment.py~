@@ -49,14 +49,11 @@ def run_experiment(experiment_config: Dict, save_weights: bool, gpu_ind: int, us
     print(dataset)
     # Import Models module, instantiate model object with dataset and network objects
     models_module = importlib.import_module('text_recognizer.models')
-    # CharacterModel, LineModel...etc.
     model_class_ = getattr(models_module, experiment_config['model'])
 
     networks_module = importlib.import_module('text_recognizer.networks')
-    # mlp, resnet...etc.
     network_fn_ = getattr(networks_module, experiment_config['network'])
     network_args = experiment_config.get('network_args', {})
-    # model object
     model = model_class_(dataset_cls=dataset_class_, network_fn=network_fn_, dataset_args=dataset_args, network_args=network_args)
     print(model)
 
@@ -64,7 +61,7 @@ def run_experiment(experiment_config: Dict, save_weights: bool, gpu_ind: int, us
     experiment_config['experiment_group'] = experiment_config.get('experiment_group', None)
     experiment_config['gpu_ind'] = gpu_ind
 
-    # Run training script using loaded objects
+
     train_model(
         model,
         dataset,
@@ -73,12 +70,10 @@ def run_experiment(experiment_config: Dict, save_weights: bool, gpu_ind: int, us
         gpu_ind=gpu_ind,
         use_wandb=use_wandb
     )
-    # Compute performance using evaluation metric on the test set
     score = model.evaluate(dataset.x_test, dataset.y_test)
-    # Print performance score
     print(f'Test evaluation: {score}')
 
-    # Save model weights
+
     if save_weights:
         model.save_weights()
 
