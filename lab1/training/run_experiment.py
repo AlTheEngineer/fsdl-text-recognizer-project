@@ -49,11 +49,14 @@ def run_experiment(experiment_config: Dict, save_weights: bool, gpu_ind: int, us
     print(dataset)
 
     models_module = importlib.import_module('text_recognizer.models')
+    # CharacterModel, LineModel...etc.
     model_class_ = getattr(models_module, experiment_config['model'])
 
     networks_module = importlib.import_module('text_recognizer.networks')
+    # mlp, resnet...etc.
     network_fn_ = getattr(networks_module, experiment_config['network'])
     network_args = experiment_config.get('network_args', {})
+    # model object
     model = model_class_(dataset_cls=dataset_class_, network_fn=network_fn_, dataset_args=dataset_args, network_args=network_args)
     print(model)
 
