@@ -23,9 +23,9 @@ def resnet(input_shape: Tuple[int, ...],
 
     
     # Stage 1
-    X = Conv2D(64, (5, 5), padding='same', name = 'conv1')(image_reshaped)
-    X = Activation('relu')(X)
+    X = Conv2D(28, (5, 5), padding='same', name = 'conv1')(image_reshaped)
     X = BatchNormalization(axis = 3, name = 'bn_conv1')(X)
+    X = Activation('relu')(X)
     # feature map shape = (28, 28, 64)
     
     X = convolutional_block(X, 5, [64, 64, 64], 1, "a")
@@ -34,14 +34,15 @@ def resnet(input_shape: Tuple[int, ...],
     X = convolutional_block(X, 3, [128, 128, 128], 2, "a")
     X = Activation('relu')(X)
     # feature map shape = (8, 8, 128)
-    X = convolutional_block(X, 2, [256, 256, 256], 3, "a")
-    X = Activation('relu')(X)
-    # feature map shape = (4, 4, 256)
+    X = Dropout(0.25)(X)
+    X = AveragePooling2D((2, 2), strides=(2, 2))(X)
+    # feature map shape = (4, 4, 128)
+    
     X = Flatten()(X)
     X = Dense(256, activation='relu')(X)
-    X = Dropout(0.5)(X)
+    X = Dropout(0.25)(X)
     X = Dense(128, activation='relu')(X)
-    X = Dropout(0.2)(X)
+    X = Dropout(0.5)(X)
     
     preds = Dense(num_classes, activation='softmax')(X)
     
@@ -149,3 +150,26 @@ def convolutional_block(X, f, filters, stage, block, s = 2):
     X = Add()([X, X_shortcut])
     
     return X
+
+"""resnetv1
+    # Stage 1
+    X = Conv2D(64, (5, 5), padding='same', name = 'conv1')(image_reshaped)
+    X = Activation('relu')(X)
+    X = BatchNormalization(axis = 3, name = 'bn_conv1')(X)
+    # feature map shape = (28, 28, 64)
+    
+    X = convolutional_block(X, 5, [64, 64, 64], 1, "a")
+    X = Activation('relu')(X)
+    # feature map shape = (14, 14, 64)
+    X = convolutional_block(X, 3, [128, 128, 128], 2, "a")
+    X = Activation('relu')(X)
+    # feature map shape = (8, 8, 128)
+    X = convolutional_block(X, 2, [256, 256, 256], 3, "a")
+    X = Activation('relu')(X)
+    # feature map shape = (4, 4, 256)
+    X = Flatten()(X)
+    X = Dense(256, activation='relu')(X)
+    X = Dropout(0.5)(X)
+    X = Dense(128, activation='relu')(X)
+    X = Dropout(0.2)(X)
+"""
