@@ -7,7 +7,7 @@ data
 # Vim
 *~
 *.swp
-*swo
+*.swo
 
 # Node
 node_modules
