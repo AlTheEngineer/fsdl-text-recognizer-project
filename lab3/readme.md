@@ -4,7 +4,7 @@ We solve lab2s problem using LSTM with CTC loss (see distill post for details). 
 ZFNet was the next improvement over AlexNet. Involved just hyperparameter tuning. The paper more popular for deconvolution visualizations.
 
 Next came VGG16 that adopted a uniform architecture applied repeatedly. Conv layers are memory intensive despite fewer params. FC layers require more compute.
-GoogLeNet are just as deep as VGG but fewer parameters by removing FC layers. Implements the inception module. Adopts arch that avoids arch search but results in huge depth dimensions. Issue solved by using 1x1 conv layers. 1x1 convs can be used for cross-channel correlations. Inkected classifier loss at earlier layers, which incentivises learning in the earlier layers.
+GoogLeNet are just as deep as VGG but fewer parameters by removing FC layers. Implements the inception module. Adopts arch that avoids arch search but results in huge depth dimensions. Issue solved by using 1x1 conv layers. 1x1 convs can be used for cross-channel correlations. Injected classifier loss at earlier layers, which incentivises learning in the earlier layers.
 
 Human performance on ImageNet measured by Andrej Karpathy. 
 
@@ -24,7 +24,7 @@ Qs: Has anyone tried pixel-to-pixel heat map generation for detection? Fully Con
     
 Homework:
     Use data augmentation on labs
-    Implement Inception v4 and ResNet50 for lab1 and lab3 
+    Implement Inception v4 and ResNet for lab1 and lab3 
     Implement bidirectional LSTMs for lab3
     Read about region proposal, RCNN, Faster RCNN, and Mask RCNN
     Maybe try transfer learning

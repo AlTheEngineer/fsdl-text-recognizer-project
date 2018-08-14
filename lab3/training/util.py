@@ -10,7 +10,7 @@ from text_recognizer.models.base import Model
 from training.gpu_util_sampler import GPUUtilizationSampler
 
 
-EARLY_STOPPING = True
+EARLY_STOPPING = False
 GPU_UTIL_SAMPLER = True
 
 

@@ -15,7 +15,7 @@ from text_recognizer.networks.ctc import ctc_decode
 def line_lstm_ctc(input_shape, output_shape, window_width=28, window_stride=14):
     image_height, image_width = input_shape
     output_length, num_classes = output_shape
-
+    
     num_windows = int((image_width - window_width) / window_stride) + 1
     if num_windows < output_length:
         raise ValueError(f'Window width/stride need to generate at least {output_length} windows (currently {num_windows})')
@@ -35,6 +35,7 @@ def line_lstm_ctc(input_shape, output_shape, window_width=28, window_stride=14):
     # Note that lstms expect a input of shape (num_batch_size, num_timesteps, feature_length).
 
     ##### Your code below (Lab 3)
+    # Reshape input image to 3D tensor for use with Conv2D layers
     image_reshaped = Reshape((image_height, image_width, 1))(image_input)
     # (image_height, image_width, 1)
 
@@ -51,6 +52,7 @@ def line_lstm_ctc(input_shape, output_shape, window_width=28, window_stride=14):
     # (num_windows, 128)
 
     lstm_output = lstm_fn(128, return_sequences=True)(convnet_outputs)
+    lstm_output = Dropout(0.2)(lstm_output)
     # (num_windows, 128)
 
     softmax_output = Dense(num_classes, activation='softmax', name='softmax_output')(lstm_output)
